@@ -17,7 +17,7 @@ int main() {
 	cin >> exponente;
 
 	potencia = potenciar(base, exponente, potencia);
-	cout << potencia;
+	cout << "La potencia es: " << potencia;
 }
 
 int potenciar(int base, int exponente, int potencia) {
