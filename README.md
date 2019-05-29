@@ -1,2 +1,0 @@
-# EjerciciosDesarrollo
-Para Entregar
