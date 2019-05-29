@@ -1,0 +1,419 @@
+EJERCICIO 1
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int numeroMayor(int unNumero, int otroNumero);
+
+const int cantidadMaxima = 10;
+
+int main()
+{
+int numeros[cantidadMaxima];
+int mayorNumero = 0;
+
+for (int i = 0; i < cantidadMaxima; i++) {
+cout << "Ingrese un numero: " << endl; 
+cin >> numeros[i];
+mayorNumero = numeroMayor(numeros[i], mayorNumero);
+}
+cout << "El mayor numero de tu lista es: " << mayorNumero;
+}
+
+int numeroMayor(int unNumero, int otroNumero) {
+if (unNumero > otroNumero) {
+otroNumero = unNumero;
+}
+return otroNumero;
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCIO 2
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+const int cantidadMaxima = 50;
+
+int acumuladorMayores100(int unNumero, int otroNumero, int acumulador);
+int contadorMayores100(int unNumero, int otroNumero, int contador);
+int sumaDeMenores(int unNumero, int otroNumero, int acumulador);
+
+int main()
+{
+	int numero[cantidadMaxima];
+	int acumulador = 0;
+	int contadorMayoresA100 = 0;
+	int sumaMenores = 0;
+	int promedio = 0;
+
+	for (int i = 0; i < cantidadMaxima; i++) {
+		cout << "Ingrese un numero: ";
+		cin >> numero[i];
+		acumulador = acumuladorMayores100(numero[i], 100, acumulador);
+		contadorMayoresA100 = contadorMayores100(numero[i], 100, contadorMayoresA100);
+		sumaMenores = sumaDeMenores(numero[i], -10, sumaMenores);
+	}
+
+	promedio = acumulador / contadorMayoresA100;
+	cout << "El promedio de los numeros mayores a 100 es: " << promedio << endl;
+	cout << "La suma de los numero menores a -10 es: " << sumaMenores;
+}
+
+int acumuladorMayores100(int unNumero, int otroNumero, int acumulador) {
+	if (unNumero > otroNumero) {
+		acumulador += unNumero;
+	}
+	return acumulador;
+}
+
+int contadorMayores100(int unNumero, int otroNumero, int contador) {
+	if (unNumero > otroNumero) {
+		contador++;
+	}
+	return contador;
+}
+
+int sumaDeMenores(int unNumero, int otroNumero, int acumulador) {
+	if (unNumero < otroNumero) {
+		acumulador += unNumero;
+	}
+	return acumulador;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 3
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int valorMaximo(int unNumero, int otroNumero);
+int posicionValorMaximo(int valorAnterior, int maximo, int posicion, int index);
+
+int main() {
+	int numero[10000];
+	int maximo = 0;
+	int i = 0;
+	int valorAnterior = 0;
+	int posicion = 0;
+
+	do {
+		cout << "Ingrese un numero: ";
+		cin >> numero[i];
+		
+		valorAnterior = maximo;
+
+		maximo = valorMaximo(numero[i], maximo);
+		
+		posicion = posicionValorMaximo(valorAnterior, maximo, posicion, i);
+
+		i++;
+		
+	} while (numero[i-1] >= 0);
+
+	cout << "El valor maximo de tu lista de numeros es " << maximo << " " << "y su posicion es " << posicion;
+
+}
+
+int valorMaximo(int unNumero, int otroNumero) {
+	if (unNumero > otroNumero) {
+		otroNumero = unNumero;
+	}
+	return otroNumero;
+}
+
+int posicionValorMaximo(int valorAnterior, int maximo, int posicion, int index) {
+	if (valorAnterior != maximo) {
+		posicion = index;
+	}
+	return posicion;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 4
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int main() {
+
+	int cantidadMultiplos = 0;
+	int resultado = 0;
+	int multiplicador = 0;
+	int numeroDeLaTabla = 0;
+	int numeroDivision = 0;
+
+	cout << "Ingrese la cantidad de multiplos que quiere: ";
+	cin >> cantidadMultiplos;
+	cout << "Ingrese de que numero quiere la tabla: ";
+	cin >> numeroDeLaTabla;
+	cout << "Ingrese por que numero no se deben dividir los multiplos: ";
+	cin >> numeroDivision;
+	
+	for (int i = 0; i < cantidadMultiplos; i++) {
+
+		resultado = numeroDeLaTabla * multiplicador;
+		multiplicador++;
+
+		if (resultado % numeroDivision != 0) {
+			cout << "La multiplicacion es: " << resultado << endl;
+		}
+		else
+		{
+			i--;
+		}		
+	}
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 5
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int giveAnio(int fechaEntera, int anio);
+int giveMes(int fechaEntera, int anio, int mes);
+int giveDia(int fechaEntera, int anio, int mes, int dia);
+
+int main() {
+
+	int fechaEntera = 0;
+	int anio = 0;
+	int mes = 0;
+	int dia = 0;
+
+	cout << "Ingrese su fecha con formato YYYYMMDD: ";
+	cin >> fechaEntera;
+
+	anio = giveAnio(fechaEntera, anio);
+	cout << "El anio de su fecha es: " << anio << endl; 
+
+	mes = giveMes(fechaEntera, anio, mes);
+	cout << "El mes de su fecha es: " << mes << endl;
+
+	dia = giveDia(fechaEntera, anio, mes, dia);
+	cout << "El dia de su fecha es: " << dia;
+}
+
+int giveAnio(int fechaEntera, int anio) {
+	anio = fechaEntera / 10000;
+	return anio;
+}
+
+int giveMes(int fechaEntera, int anio, int mes) {
+	anio *= 10000;
+	mes = fechaEntera - anio;
+	mes /= 100;
+	return mes;
+}
+
+int giveDia(int fechaEntera, int anio, int mes, int dia) {
+	anio *= 10000;
+	mes *= 100;
+	dia = fechaEntera - anio - mes;
+	return dia;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 6
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int giveAnio(int fechaEntera, int anio);
+int giveMes(int fechaEntera, int anio, int mes);
+int giveDia(int fechaEntera, int anio, int mes, int dia);
+string fechaMasReciente(int anio, int anio2,int mes, int mes2, int dia, int dia2, string fechaReciente);
+
+int main() {
+
+	int fechaEntera = 0;
+	int anio = 0;
+	int mes = 0;
+	int dia = 0;
+	int fechaEntera2 = 0;
+	int anio2 = 0;
+	int mes2 = 0;
+	int dia2 = 0;
+	string fechaReciente;
+
+	cout << "Ingrese la primer fecha con formato YYYYMMDD: ";
+	cin >> fechaEntera;
+	cout << "Ingrese la segunda fecha con formato YYYYMMDD: ";
+	cin >> fechaEntera2;
+
+	anio = giveAnio(fechaEntera, anio); 
+	mes = giveMes(fechaEntera, anio, mes);
+	dia = giveDia(fechaEntera, anio, mes, dia);
+
+	anio2 = giveAnio(fechaEntera2, anio2); 
+	mes2 = giveMes(fechaEntera2, anio2, mes2);
+	dia2 = giveDia(fechaEntera2, anio2, mes2, dia2);
+
+	fechaReciente = fechaMasReciente(anio, anio2, mes, mes2, dia, dia2, fechaReciente);
+	cout << fechaReciente;
+
+}
+
+int giveAnio(int fechaEntera, int anio) {
+	anio = fechaEntera / 10000;
+	return anio;
+}
+
+int giveMes(int fechaEntera, int anio, int mes) {
+	anio *= 10000;
+	mes = fechaEntera - anio;
+	mes /= 100;
+	return mes;
+}
+
+int giveDia(int fechaEntera, int anio, int mes, int dia) {
+	anio *= 10000;
+	mes *= 100;
+	dia = fechaEntera - anio - mes;
+	return dia;
+}
+
+string fechaMasReciente(int anio, int anio2, int mes, int mes2, int dia, int dia2, string fechaReciente) {
+	if (anio > anio2) {
+		fechaReciente = "La primer fecha es mas reciente";
+	} else if (anio2 > anio) {
+		fechaReciente = "La segunda fecha es mas reciente";
+	} else if (mes > mes2) {
+		fechaReciente = "La primer fecha es mas reciente";
+	} else if (mes2 > mes) {
+		fechaReciente = "La segunda fecha es mas reciente";
+	} else if (dia > dia2) {
+		fechaReciente = "La primer fecha es mas reciente";
+	} else if (dia2 < dia) {
+		fechaReciente = "La segunda fecha es mas reciente";
+	}else
+	{
+		fechaReciente = "Las fechas son exactamente iguales";
+	}
+	return fechaReciente;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 7
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+int unificarFecha(int anio, int mes, int dia, int fechaEntera);
+
+int main() {
+	int anio = 0;
+	int mes = 0;
+	int dia = 0;
+	int fechaEntera = 0;
+
+	cout << "Ingrese el anio de su fecha: " << endl;
+	cin >> anio;
+	cout << "Ingrese el mes de su fecha: " << endl;
+	cin >> mes;
+	cout << "Ingrese el dia de su fecha: " << endl;
+	cin >> dia;
+
+	fechaEntera = unificarFecha(anio, mes, dia, fechaEntera);
+	cout << "Su fecha entera es: " << fechaEntera;
+}
+
+int unificarFecha(int anio, int mes, int dia, int fechaEntera) {
+	anio *= 10000;
+	mes *= 100;
+	fechaEntera = anio + mes + dia;
+	return fechaEntera;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 8
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+using namespace std;
+
+string multiplos(int primerNumero, int segundoNumero, string multiploOno);
+
+int main() {
+	int primerNumero = 0;
+	int segundoNumero = 0;
+	string multiploOno;
+
+	cout << "Ingrese el primer numero: " << endl;
+	cin >> primerNumero;
+	cout << "Ingrese el segundo numero: " << endl;
+	cin >> segundoNumero;
+
+	multiploOno = multiplos(primerNumero, segundoNumero, multiploOno);
+	cout << multiploOno;
+	
+}
+
+string multiplos(int primerNumero, int segundoNumero, string multiploOno) {
+	if (primerNumero % segundoNumero == 0 || segundoNumero % primerNumero == 0) {
+		multiploOno = "Sus numero son multiplos";
+	}
+	else {
+		multiploOno = "Sus numeros no son multiplos";
+	}
+	return multiploOno;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 9
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+#include <math.h>
+using namespace std;
+
+int potenciar(int base, int exponente, int potencia);
+
+int main() {
+	int base = 0;
+	int exponente = 0;
+	int potencia = 0;
+
+	cout << "Ingrese la base de su potencia: " << endl;
+	cin >> base;
+	cout << "Ingrese el exponente de su potencia: " << endl;
+	cin >> exponente;
+
+	potencia = potenciar(base, exponente, potencia);
+	cout << potencia;
+}
+
+int potenciar(int base, int exponente, int potencia) {
+	potencia = pow(base, exponente);
+	return potencia;
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EJERCICIO 10
+#include "pch.h"
+#include <iostream>
+#include <sstream>
+#include <math.h>
+using namespace std;
+
+bool primo(int);      
+
+int main() {
+	int  numero = 0;
+	cout << "Ingrese un numero para determinar si es primo o no: ";
+	cin >> numero;
+
+	if (primo(numero))         
+		cout << numero << " es un numero primo" << endl;
+	else
+		cout << numero << " no es un numero primo" << endl;
+}
+
+bool primo(int unNumero) {
+	if (unNumero == 1 || unNumero == 2)
+		return true;
+	for (int i = 2; i < unNumero / 2; i++) {
+		if (unNumero%i == 0)
+			return false;
+	}
+	return true;
+}
